@@ -29,7 +29,7 @@ export default function AuthenticatedApp() {
   if (!token) {
     return (
       <Navigate
-        to={`/auth/signin?callbackUrl=${encodeURIComponent(location.pathname)}`}
+        to={`/auth/signin?callbackUrl=${encodeURIComponent(location.pathname + location.search)}`}
         replace
       />
     );

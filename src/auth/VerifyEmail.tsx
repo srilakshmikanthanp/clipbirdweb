@@ -4,9 +4,11 @@ import { useEffect, useState } from 'react';
 import Password from '@mui/icons-material/Password';
 import { useMutation } from '@tanstack/react-query';
 import { Form } from 'react-bootstrap';
-import { useNavigate, useSearchParams } from 'react-router';
+import { Navigate, useNavigate, useSearchParams } from 'react-router';
 import styled from 'styled-components';
 import UserAPIClient from 'user/UserAPIClient';
+import { useAppSelector } from 'common/redux/hooks';
+import { selectToken } from './authSlice';
 
 const ResetPasswordPage = styled.div`
   display: flex;
@@ -32,12 +34,13 @@ export default function VerifyEmail() {
   const [alertMessage, setAlertMessage] = useState('');
   const [searchParams] = useSearchParams();
   const [token, setToken] = useState<string | null>(searchParams.get('token'));
+  const authToken = useAppSelector(selectToken)!;
   const navigate = useNavigate();
 
   const userApiClient = new UserAPIClient();
   const mutation = useMutation({
     mutationKey: ['login'],
-    mutationFn: (props: { token: string}) => {
+    mutationFn: (props: { token: string }) => {
       return userApiClient.verify(props.token);
     }
   });
@@ -55,6 +58,15 @@ export default function VerifyEmail() {
       setIsAlertOpen(true);
     }
   }, [mutation.error, mutation.isError]);
+
+  if (!authToken) {
+    return (
+      <Navigate
+        to={`/auth/signin?callbackUrl=${encodeURIComponent(location.pathname + location.search)}`}
+        replace
+      />
+    );
+  }
 
   const onResetPassword = () => {
     mutation.mutate({ token: token! });

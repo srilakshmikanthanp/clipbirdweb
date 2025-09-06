@@ -1,6 +1,7 @@
 import {
   DashboardRounded,
   DevicesRounded,
+  LanguageRounded,
   SettingsRounded
 } from '@mui/icons-material';
 
@@ -40,10 +41,18 @@ export default function SessionedApp() {
     pattern: 'settings{/:section}',
   };
 
+  const sessions: NavigationItem = {
+    title: 'Sessions',
+    segment: 'sessions',
+    icon: <LanguageRounded />,
+    pattern: 'sessions',
+  };
+
   const navigation: Navigation = [];
 
   navigation.push(dashboard);
   navigation.push(devices);
+  navigation.push(sessions);
   navigation.push(settings);
 
   const branding: Branding = {

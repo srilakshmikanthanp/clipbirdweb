@@ -32,6 +32,7 @@ import VerifyEmail from 'auth/VerifyEmail';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AppDashboardLayout from 'layout/AppDashboardLayout';
 import Devices from 'device/Devices';
+import Sessions from 'session/Sessions';
 
 // set tenant id and token in request headers
 axios.interceptors.request.use(function (config) {
@@ -83,6 +84,12 @@ const devicesRoute = (
   </Route>
 );
 
+const sessionsRoute = (
+  <Route path="sessions">
+    <Route index element={<Sessions />} />
+  </Route>
+);
+
 const indexRoute = (
   <Route index element={<Dashboard />} />
 );
@@ -93,6 +100,7 @@ const appRoute = (
       {settingsRoute}
       {indexRoute}
       {devicesRoute}
+      {sessionsRoute}
     </Route>
   </Route>
 );
