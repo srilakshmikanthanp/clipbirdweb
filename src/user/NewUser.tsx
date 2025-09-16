@@ -55,11 +55,13 @@ export default function NewUser() {
     ) {
       setIsOpen(true);
       setMessage('Please fill all the fields.');
+      return;
     }
 
     if (password !== confirmPassword) {
       setIsOpen(true);
       setMessage('Passwords do not match.');
+      return;
     }
 
     const request: UserRequestDto = {
