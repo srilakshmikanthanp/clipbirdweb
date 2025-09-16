@@ -1,6 +1,6 @@
 import { Box, Button, Divider, Paper, Tooltip, Typography } from "@mui/material";
 
-export interface DashboardItemProps {
+export interface DashboardComponentProps {
   name: string;
   description: string;
   icon: React.ReactNode;
@@ -9,9 +9,9 @@ export interface DashboardItemProps {
   children?: React.ReactNode;
 }
 
-export default function DashboardItem(props: DashboardItemProps) {
+export default function DashboardComponent(props: DashboardComponentProps) {
   return (
-    <Paper elevation={3} sx={{ maxWidth: 600, minWidth: 300, borderRadius: 5, height: '100%', display: 'flex', flexDirection: 'column' }} >
+    <Paper elevation={3} sx={{ minWidth: 300, borderRadius: 5, height: '100%', display: 'flex', flexDirection: 'column' }} >
       <Box display="flex" alignItems="center" justifyContent="space-between" padding={2}>
         <Box display="flex" alignItems="center">
           <Tooltip title={props.description} arrow>
