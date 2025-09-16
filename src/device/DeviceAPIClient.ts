@@ -17,7 +17,7 @@ export default class DeviceAPIClient {
 
   getAllDevices = async (
     pageable: Pageable,
-    search: string | null,
+    search?: string | null,
   ): Promise<PageResponse<DeviceResponseDto>> => {
     const { data } = await axios.get<PageResponse<DeviceResponseDto>>(
       this.deviceBaseUrl,
