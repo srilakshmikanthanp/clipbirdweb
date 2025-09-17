@@ -15,7 +15,7 @@ export default function DashboardDevicesComponent() {
   const [page, setPage] = useState<number>(0);
   const [sort] = useState<Sortable[]>([
     {
-      property: 'name',
+      property: 'createdAt',
       order: 'ASC',
     },
   ]);
