@@ -42,6 +42,21 @@ export default function Devices() {
     },
   });
 
+  const deleteAllDevicesMutation = useMutation({
+    mutationFn: deviceAPIClient.deleteAllDevices,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['devices'] });
+      setAlertMessage("All devices deleted successfully");
+      setIsAlertOpen(true);
+      setAlertType('success');
+    },
+    onError: (error) => {
+      setAlertMessage(error.message);
+      setIsAlertOpen(true);
+      setAlertType('error');
+    },
+  });
+
   const response = useQuery({
     queryKey: ['devices', page, rowsPerPage, sort, search],
     queryFn: () => deviceAPIClient.getAllDevices({ page, size: rowsPerPage, sort }, search),
@@ -82,7 +97,7 @@ export default function Devices() {
   };
 
   const CustomToolBar = () => {
-    return <DevicesToolbar />;
+    return <DevicesToolbar onDeleteAllDevicess={() => deleteAllDevicesMutation.mutate()} />;
   };
 
   if (response.isPending) {

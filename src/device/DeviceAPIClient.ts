@@ -36,4 +36,8 @@ export default class DeviceAPIClient {
   deleteDevice = async (id: string): Promise<void> => {
     await axios.delete(`${this.deviceBaseUrl}/${id}`);
   };
+
+  deleteAllDevices = async (): Promise<void> => {
+    await axios.delete(`${this.deviceBaseUrl}/all`);
+  }
 }
