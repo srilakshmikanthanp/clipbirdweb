@@ -96,8 +96,14 @@ export default function Devices() {
     }
   };
 
+  const handleDeleteAllDevices = () => {
+    if (window.confirm('Are you sure you want to delete all devices?')) {
+      deleteAllDevicesMutation.mutate();
+    }
+  }
+
   const CustomToolBar = () => {
-    return <DevicesToolbar onDeleteAllDevicess={() => deleteAllDevicesMutation.mutate()} />;
+    return <DevicesToolbar onDeleteAllDevicess={handleDeleteAllDevices} />;
   };
 
   if (response.isPending) {

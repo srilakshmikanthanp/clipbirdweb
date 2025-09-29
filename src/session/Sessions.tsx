@@ -70,8 +70,14 @@ export default function Sessions() {
     }
   };
 
+  const handleDeleteAllOtherSessions = () => {
+    if (window.confirm('Are you sure you want to delete all other sessions?')) {
+      deleteAllOtherSessionsMutation.mutate();
+    }
+  }
+
   const CustomToolBar = () => {
-    return <SessionsToolbar onDeleteAllOtherSessions={() => deleteAllOtherSessionsMutation.mutate()} />;
+    return <SessionsToolbar onDeleteAllOtherSessions={handleDeleteAllOtherSessions} />;
   };
 
   if (response.isPending) {
