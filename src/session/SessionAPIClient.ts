@@ -13,4 +13,8 @@ export default class SessionAPIClient {
   delete = async (id: string): Promise<Message> => {
     return (await axios.delete<Message>(`${this.sessionApiBaseUrl}/${id}`)).data;
   }
+
+  deleteOthers = async (): Promise<Message> => {
+    return (await axios.delete<Message>(`${this.sessionApiBaseUrl}/others`)).data;
+  }
 }

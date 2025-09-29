@@ -28,6 +28,21 @@ export default function Sessions() {
     },
   });
 
+  const deleteAllOtherSessionsMutation = useMutation({
+    mutationFn: sessionAPIClient.deleteOthers,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['sessions'] });
+      setAlertMessage("Other sessions deleted successfully");
+      setIsAlertOpen(true);
+      setAlertType('success');
+    },
+    onError: (error) => {
+      setAlertMessage(error.message);
+      setIsAlertOpen(true);
+      setAlertType('error');
+    },
+  });
+
   const response = useQuery({
     queryKey: ['sessions'],
     queryFn: () => sessionAPIClient.getAll(),
@@ -56,7 +71,7 @@ export default function Sessions() {
   };
 
   const CustomToolBar = () => {
-    return <SessionsToolbar />;
+    return <SessionsToolbar onDeleteAllOtherSessions={() => deleteAllOtherSessionsMutation.mutate()} />;
   };
 
   if (response.isPending) {
